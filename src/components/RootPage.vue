@@ -30,7 +30,7 @@
       <ReviewArticleVue v-if="vue === 1" />
       <ReviewArticleRecords v-else-if="vue === 2" />
       <ReportArticle v-else-if="vue === 3"/>
-      <div v-if="vue === 4">管理被举报文章记录</div>
+      <ReportArticleRecords v-else-if="vue === 4"/>
       <div v-if="vue === 5">管理被举报用户</div>
       <div v-if="vue === 6">管理被举报用户记录</div>
       <div v-if="vue === 7">管理被举报评论</div>
@@ -43,12 +43,14 @@
 import ReviewArticleVue from "./views/ReviewArticle.vue";
 import ReviewArticleRecords from "./views/ReviewArticleRecords.vue";
 import ReportArticle from "./views/ReportArticle.vue";
+import ReportArticleRecords from "./views/ReportArticleRecords.vue";
 
 export default {
   components: {
     ReviewArticleVue,//未审核
     ReviewArticleRecords,//审核记录
-    ReportArticle,//举报文章
+    ReportArticle,//被举报文章
+    ReportArticleRecords,//被举报操作记录
   },
   data() {
     return {
