@@ -1,0 +1,49 @@
+<template>
+  <el-main>
+    <el-table v-loading="loading" :data="AuditArticle">
+      <el-table-column prop="articleId" label="文章ID" width="180"> </el-table-column>
+      <el-table-column prop="title" label="文章标题"> </el-table-column>
+      <el-table-column prop="cause" label="举报原因"> </el-table-column>
+      <el-table-column label="操作结果">
+        <template v-slot="scope">
+          {{ scope.row.state === 1 ? "已冻结" : "已驳回" }}
+        </template>
+      </el-table-column>
+    </el-table>
+  </el-main>
+</template>
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      loading:true,//是否在加载数据
+      AuditArticle:"",//待审核文章
+    };
+  },
+  methods:{
+    //获取我的全部待审核文章
+    async getAuditArticle(){
+      this.loading = true;
+      const resp = await axios.post("/api/Report");
+      this.AuditArticle = resp.data;
+      this.loading = false;
+    }
+  },
+  mounted() {
+    this.getAuditArticle();
+  } 
+}; 
+</script>
+
+<style scoped>
+.el-header {
+  background-color: #b3c0d1;
+  color: #333;
+  line-height: 60px;
+}
+
+.el-aside {
+  color: #333;
+}
+</style>

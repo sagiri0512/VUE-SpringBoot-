@@ -37,8 +37,8 @@ export default {
     openUpdateState(id, state) {
       this.$confirm(
         state === 1
-          ? "此操作将使该文章通过审核, 是否继续?"
-          : "此操作会将该文章驳回, 是否继续?",
+          ? "此操作将使该文章冻结, 是否继续?"
+          : "此操作会将该举报驳回, 是否继续?",
         "提示",
         {
           confirmButtonText: "确定",
@@ -53,7 +53,7 @@ export default {
               type: "success",
               message: state === 1 ? "通过成功!" : "驳回成功!",
             });
-            this.getAuditArticle();
+            this.getReportArticle();
           } else {
             this.$message({
               type: "error",
@@ -68,17 +68,17 @@ export default {
           });
         });
     },
-    //修改待审核文章状态
-    // async UpdateState(id, state1){
-    //   const state = {
-    //     id : id,
-    //     state : state1
-    //   }
-    //   const resp = await axios.post("/api/updateState", state);
-    //   return resp.data.code;
-    // },
+    //修改被举报文章状态
+    async UpdateState(id, state1){
+      const state = {
+        id : id,
+        state : state1
+      }
+      const resp = await axios.post("/api/updateReportState", state);
+      return resp.data.code;
+    },
     //获取我的全部待管理被举报文章
-    async getAuditArticle(){
+    async getReportArticle(){
       this.loading = true;
       const resp = await axios.post("/api/getReportArticle");
       this.AuditArticle = resp.data;
@@ -86,7 +86,7 @@ export default {
     }
   },
   mounted() {
-    this.getAuditArticle();
+    this.getReportArticle();
   }
 };
 </script>
