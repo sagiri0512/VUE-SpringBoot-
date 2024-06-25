@@ -10,7 +10,7 @@ const router = createRouter({
     routes: [
         {
             path: '/', // 设置默认路由的路径为根路径
-            redirect: '/SuperRootLogin' // 将根路径重定向到 '/SuperRootLogin'
+            redirect: '/RootLogin' // 将根路径重定向到 '/SuperRootLogin'
         },
         {
             path: '/SuperRootLogin',
