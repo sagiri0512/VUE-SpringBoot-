@@ -26,8 +26,8 @@
       <ReviewArticleRecords v-else-if="vue === 2" />
       <ReportArticle v-else-if="vue === 3"/>
       <ReportArticleRecords v-else-if="vue === 4"/>
-      <UpdatePass v-else-if="5"/>
-    </el-container>
+      <UpdatePass v-else-if="5" style="margin-top: 10%;"/>
+    </el-container> 
   </el-container>
 </template>
 
