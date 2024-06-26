@@ -25,12 +25,16 @@
 
 <script>
 import axios from "axios";
+import {mapGetters } from 'vuex';
 export default {
   data() {
     return {
       loading:true,//是否在加载数据
       AuditArticle:"",//待审核文章
     };
+  },
+  computed: {
+    ...mapGetters(['getRoot']), // 将 Vuex 中的 getter 映射到组件的计算属性中
   },
   methods:{
     //文章审核通过和驳回提示框
@@ -80,7 +84,10 @@ export default {
     //获取我的全部待管理被举报文章
     async getReportArticle(){
       this.loading = true;
-      const resp = await axios.post("/api/getReportArticle");
+      const Id = {
+        id : this.getRoot,
+      }
+      const resp = await axios.post("/api/getReportArticle", Id);
       this.AuditArticle = resp.data;
       this.loading = false;
     }

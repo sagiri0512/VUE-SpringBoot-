@@ -16,6 +16,7 @@
 
 <script>
 import axios from "axios";
+import {mapGetters } from 'vuex';
 export default {
   data() {
     return {
@@ -23,11 +24,17 @@ export default {
       AuditArticle:"",//待审核文章
     };
   },
+  computed: {
+    ...mapGetters(['getRoot']), // 将 Vuex 中的 getter 映射到组件的计算属性中
+  },
   methods:{
     //获取我的全部待审核文章
     async getAuditArticle(){
       this.loading = true;
-      const resp = await axios.post("/api/Reviewed");
+      const Id = {
+        id : this.getRoot,
+      }
+      const resp = await axios.post("/api/Reviewed", Id);
       this.AuditArticle = resp.data;
       this.loading = false;
     }

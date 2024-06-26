@@ -12,29 +12,21 @@
             <el-menu-item index="3" @click="toValue(3)">管理</el-menu-item>
             <el-menu-item index="4" @click="toValue(4)">管理记录</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="管理被举报用户">
-            <el-menu-item index="5" @click="toValue(5)">管理</el-menu-item>
-            <el-menu-item index="6" @click="toValue(6)">管理记录</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="管理被举报评论">
-            <el-menu-item index="7" @click="toValue(7)">管理</el-menu-item>
-            <el-menu-item index="8" @click="toValue(8)">管理记录</el-menu-item>
+          <el-menu-item-group title="修改密码">
+            <el-menu-item index="5" @click="toValue(5)">修改密码</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
     </el-aside>
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
-        <span>王小虎</span>
+        <span>{{ rootName }}</span>
       </el-header>
       <ReviewArticleVue v-if="vue === 1" />
       <ReviewArticleRecords v-else-if="vue === 2" />
       <ReportArticle v-else-if="vue === 3"/>
       <ReportArticleRecords v-else-if="vue === 4"/>
-      <div v-if="vue === 5">管理被举报用户</div>
-      <div v-if="vue === 6">管理被举报用户记录</div>
-      <div v-if="vue === 7">管理被举报评论</div>
-      <div v-if="vue === 8">管理被举报评论记录</div>
+      <UpdatePass v-else-if="5"/>
     </el-container>
   </el-container>
 </template>
@@ -44,6 +36,9 @@ import ReviewArticleVue from "./views/ReviewArticle.vue";
 import ReviewArticleRecords from "./views/ReviewArticleRecords.vue";
 import ReportArticle from "./views/ReportArticle.vue";
 import ReportArticleRecords from "./views/ReportArticleRecords.vue";
+import UpdatePass from "./views/UpdatePass.vue";
+import {mapGetters } from 'vuex';
+import axios from "axios";
 
 export default {
   components: {
@@ -51,18 +46,32 @@ export default {
     ReviewArticleRecords,//审核记录
     ReportArticle,//被举报文章
     ReportArticleRecords,//被举报操作记录
+    UpdatePass,//修改密码
   },
   data() {
     return {
       vue: 1, // 初始展示审核文章组件
+      rootName: "",//管理员名字
     };
+  },
+  computed: {
+    ...mapGetters(['getRoot']), // 将 Vuex 中的 getter 映射到组件的计算属性中
   },
   methods: {
     toValue(value) {
       this.vue = value;
     },
+    async getRootName(){
+      const Id = {
+        id : this.getRoot
+      }
+      const resp = await axios.post("/api/getRootName", Id);
+      this.rootName = resp.data;
+    }
   },
-  mounted() {},
+  mounted() {
+    this.getRootName();
+  },
 };
 </script>
 
