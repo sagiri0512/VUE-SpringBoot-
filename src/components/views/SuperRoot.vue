@@ -97,7 +97,7 @@ export default {
 
           try {
             const code = await this.addRoot(value);
-            if (code === 0) {
+            if (code.code === 0) {
               this.$message({
                 type: "success",
                 message: "成功添加 " + value + " 为管理员！",
@@ -106,7 +106,7 @@ export default {
             } else {
               this.$message({
                 type: "error",
-                message: "操作失败！服务器错误！",
+                message: code.message,
               });
             }
           } catch (error) {
@@ -169,7 +169,7 @@ export default {
         username: username,
       };
       const resp = await axios.post("/api/addRoot", root);
-      return resp.data.code;
+      return resp.data;
     },
     // 获取管理员信息
     async getRootInfo() {
