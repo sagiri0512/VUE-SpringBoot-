@@ -4,7 +4,7 @@ import { createStore } from 'vuex';
 const store = createStore({
   state: {
     superRoot:'',//超级管理员账号
-    root : 2,//管理员账号
+    root : '',//管理员账号
     userSetter:''//用户账号
   },
   

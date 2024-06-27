@@ -1,16 +1,12 @@
 <template>
   <div class="password-change-container">
-    <div class="input-group" :class="{ 'input-error': isEmpty(currentPassword) }">
-      <label>原密码：</label>
-      <input type="password" v-model="currentPassword">
+    <div class="input-group" :class="{ 'input-error': isEmpty(name) }">
+      <label>新用户名：</label>
+      <input type="text" v-model="name">
     </div>
-    <div class="input-group" :class="{ 'input-error': isEmpty(newPassword) }">
-      <label>新密码：</label>
-      <input type="password" v-model="newPassword">
-    </div>
-    <div class="input-group" :class="{ 'input-error': isEmpty(confirmPassword) || newPassword !== confirmPassword }">
-      <label>确认密码：</label>
-      <input type="password" v-model="confirmPassword">
+    <div class="input-group" :class="{ 'input-error': isEmpty(password) }">
+      <label>密码：</label>
+      <input type="password" v-model="password">
     </div>
     <div class="error-message" v-if="errorMessage">{{ errorMessage }}</div>
     <div class="button-group">
@@ -22,45 +18,34 @@
 
 <script>
 import axios from 'axios';
-import {mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: '',
-      errorMessage: ''
+      password:'',//密码
+      name:'',//用户名
     };
-  },
-  computed: {
-    ...mapGetters(['getRoot']), // 将 Vuex 中的 getter 映射到组件的计算属性中
   },
   methods: {
     isEmpty(value) {
       return !value.trim();
     },
     async validatePasswords() {
-      if (this.isEmpty(this.currentPassword) || this.isEmpty(this.newPassword) || this.isEmpty(this.confirmPassword)) {
+      if (this.isEmpty(this.name) || this.isEmpty(this.password)) {
         this.errorMessage = '所有字段均不能为空';
-      } else if (this.newPassword !== this.confirmPassword) {
-        this.errorMessage = '新密码和确认密码不匹配';
-      } else if(this.currentPassword === this.newPassword){
-        this.errorMessage = '新密码和旧密码相同';
       }else {
-        const rootId = this.getRoot
-        const pwd = {
-          id : rootId,
-          oldPwd : this.currentPassword,
-          newPwd : this.newPassword
+        const info = {
+          id : 1,
+          name : this.name,
+          password : this.password
         }
-        const resp = await axios.post('/api/updateRootPwd', pwd)
+        const resp = await axios.post('/api/superUpdateName', info)
         if(resp.data.code === 0){
           this.$message({
             message: '修改成功',
             type: 'success'
           });
-          this.$store.commit("updateRoot", "");
+          this.$store.commit("updateSuperRoot", "");
           this.$router.push('/RootLogin')
         }else{
           this.$message({
@@ -70,10 +55,8 @@ export default {
       }
     },
     resetForm() {
-      this.currentPassword = '';
-      this.newPassword = '';
-      this.confirmPassword = '';
-      this.errorMessage = '';
+      this.name = '';
+      this.password = '';
     }
   }
 };

@@ -31,8 +31,9 @@ export default {
     //获取我的全部待审核文章
     async getAuditArticle(){
       this.loading = true;
+      const rootId = this.getRoot
       const Id = {
-        id : this.getRoot,
+        id : rootId
       }
       const resp = await axios.post("/api/Reviewed", Id);
       this.AuditArticle = resp.data;

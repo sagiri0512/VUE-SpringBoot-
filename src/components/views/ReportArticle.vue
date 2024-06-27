@@ -84,8 +84,10 @@ export default {
     //获取我的全部待管理被举报文章
     async getReportArticle(){
       this.loading = true;
+      const rootId = this.getRoot
+      console.log("rootId:", rootId);
       const Id = {
-        id : this.getRoot,
+        id : rootId
       }
       const resp = await axios.post("/api/getReportArticle", Id);
       this.AuditArticle = resp.data;

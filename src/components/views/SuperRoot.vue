@@ -1,8 +1,5 @@
 <template>
   <div class="rootDiv">
-    <div class="topDiv">
-      <h2>管理管理员</h2>
-    </div>
     <div>
       <el-button type="text" @click="openAdd" class="add">添加管理员</el-button>
       <el-input v-model="input" placeholder="输入姓名可进行搜索"></el-input>
@@ -44,8 +41,14 @@ export default {
     }
   },
   methods: {
+    openUpdateUserName(){
+      
+    },
+    openUpdatePassword(){
+
+    },
     //修改备注弹窗
-    async openUpdateRemarks(id) {
+    openUpdateRemarks(id) {
       this.$prompt("请输入备注", "修改备注", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -82,7 +85,7 @@ export default {
         });
     },
     //添加管理员弹框
-    async openAdd() {
+    openAdd() {
       this.$prompt("请输入管理员姓名，默认密码为123456", "添加管理员", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -215,16 +218,12 @@ export default {
 </script>
 
 <style scoped>
-.topDiv{
-  margin-top: 20px;
-  width: 100%;
-  text-align: center;
-}
 .add{
   font-size: 20px;
 }
 .rootDiv{
-  margin-left: 10%;
-  width: 80%;
+  margin-top: 20px;
+  margin-left: 2%;
+  width: 96%;
 }
 </style>

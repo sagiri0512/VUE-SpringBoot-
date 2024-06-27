@@ -62,8 +62,9 @@ export default {
       this.vue = value;
     },
     async getRootName(){
+      const rootId = this.getRoot
       const Id = {
-        id : this.getRoot
+        id : rootId
       }
       const resp = await axios.post("/api/getRootName", Id);
       this.rootName = resp.data;

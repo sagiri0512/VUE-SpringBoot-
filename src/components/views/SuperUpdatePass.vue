@@ -22,7 +22,6 @@
 
 <script>
 import axios from 'axios';
-import {mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -32,9 +31,6 @@ export default {
       confirmPassword: '',
       errorMessage: ''
     };
-  },
-  computed: {
-    ...mapGetters(['getRoot']), // 将 Vuex 中的 getter 映射到组件的计算属性中
   },
   methods: {
     isEmpty(value) {
@@ -48,19 +44,18 @@ export default {
       } else if(this.currentPassword === this.newPassword){
         this.errorMessage = '新密码和旧密码相同';
       }else {
-        const rootId = this.getRoot
         const pwd = {
-          id : rootId,
+          id : 1,
           oldPwd : this.currentPassword,
           newPwd : this.newPassword
         }
-        const resp = await axios.post('/api/updateRootPwd', pwd)
+        const resp = await axios.post('/api/superUpdatePass', pwd)
         if(resp.data.code === 0){
           this.$message({
             message: '修改成功',
             type: 'success'
           });
-          this.$store.commit("updateRoot", "");
+          this.$store.commit("updateSuperRoot", "");
           this.$router.push('/RootLogin')
         }else{
           this.$message({

@@ -1,21 +1,15 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import store from '../store'; // 引入 Vuex store
-import SuperRoot from '../components/SuperRoot.vue';
+import SuperPage from '../components/SuperPage.vue';
 import RootPage from '../components/RootPage.vue';
 import RootLogin from '../components/RootLogin.vue';
-import SuperRootLogin from '../components/SuperRootLogin.vue';
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [
         {
             path: '/', // 设置默认路由的路径为根路径
-            redirect: '/RootLogin' // 将根路径重定向到 '/SuperRootLogin'
-        },
-        {
-            path: '/SuperRootLogin',
-            name: 'SuperRootLogin',
-            component: SuperRootLogin,
+            redirect: '/RootLogin' // 将根路径重定向到 '/RootLogin'
         },
         {
             path: '/RootLogin',
@@ -23,9 +17,9 @@ const router = createRouter({
             component: RootLogin,
         },
         {
-            path: '/SuperRoot',
-            name: 'SuperRoot',
-            component: SuperRoot,
+            path: '/SuperPage',
+            name: 'SuperPage',
+            component: SuperPage,
             meta: {
                 requiresAuth: true,
                 role: 'superRoot' // 需要超级管理员权限
@@ -61,11 +55,7 @@ router.beforeEach((to, from, next) => {
         if (requiredRole !== '') {
             next(); // 允许进入页面
         } else {
-            if(role === 'superRoot'){
-                next('/SuperRootLogin'); // 重定向到登录页或其他页面
-            }else if(role === 'root'){
-                next('/RootLogin');
-            }
+            next('/RootLogin');
         }
     } else {
         next(); // 不需要认证，直接进入页面
