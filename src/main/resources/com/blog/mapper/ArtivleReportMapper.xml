@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.blog.mapper.ArtivleReportMapper">
+    <select id="getReportArticle" resultType="com.blog.dto.ReportArticle" parameterType="java.lang.Integer">
+        SELECT article_report.id AS id,
+               article.title AS title,
+               article.id AS articleId,
+               article_report.cause AS cause
+        FROM article, article_report
+        WHERE article.id = article_report.article_id
+          AND article_report.manage_id = #{manageId}
+          AND article_report.state = 0
+    </select>
+
+    <select id="Report" resultType="com.blog.dto.ReportArticle" parameterType="java.lang.Integer">
+        SELECT article_report.id AS id,
+               article.title AS title,
+               article.id AS articleId,
+               article_report.cause AS cause,
+               article_report.state AS state
+        FROM article, article_report
+        WHERE article.id = article_report.article_id
+          AND article_report.manage_id = #{manageId}
+          AND article_report.state != 0
+    </select>
+</mapper>

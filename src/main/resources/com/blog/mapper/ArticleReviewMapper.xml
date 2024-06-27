@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.blog.mapper.ArticleReviewMapper">
+    <select id="getReviewedArticle" resultType="com.blog.dto.ReviewArticle" parameterType="java.lang.Integer">
+        SELECT article_review.id AS id,
+               article.title AS title,
+               article.id AS articleId
+        FROM article, article_review
+        WHERE article.id = article_review.article_id
+          AND article_review.manage_id = #{manageId}
+          AND article_review.state = 0
+    </select>
+
+    <select id="Reviewed" resultType="com.blog.dto.ReviewArticle" parameterType="java.lang.Integer">
+        SELECT article_review.id AS id,
+               article.title AS title,
+               article.id AS articleId,
+               article_review.state AS state
+        FROM article, article_review
+        WHERE article.id = article_review.article_id
+          AND article_review.manage_id = #{manageId}
+          AND article_review.state != 0
+    </select>
+</mapper>
