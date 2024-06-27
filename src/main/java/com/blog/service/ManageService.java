@@ -43,12 +43,12 @@ public class ManageService {
         return manageMapper.insert(root) > 0;
     }
     //模糊查询
-    public List<Manage> getLikeManage(String username) {
+    public List<Manage> getLikeManage(String username) {//根据姓名模糊查询
         QueryWrapper<Manage> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("username", username);
         return manageMapper.selectList(queryWrapper);
     }
-    public Manage getManageByName(String username) {
+    public Manage getManageByName(String username) {//根据姓名查询非模糊查询
         QueryWrapper<Manage> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
         return manageMapper.selectOne(queryWrapper);

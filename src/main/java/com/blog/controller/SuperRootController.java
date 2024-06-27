@@ -39,13 +39,17 @@ public class SuperRootController {
         }
     }
     @PostMapping("/addRoot")
-    public Result addRoot(@RequestBody Manage root){
-        root.setPassword("123456");
-        root.setStatus(0);
-        if(manageService.addRoot(root)){
-            return Result.success();
-        }else{
-            return Result.error("添加失败");
+    public Result addRoot(@RequestBody Manage root){//添加管理员，名字重复添加
+        if(manageService.getManageByName(root.getUsername()) == null) {
+            root.setPassword("123456");
+            root.setStatus(0);
+            if (manageService.addRoot(root)) {
+                return Result.success();
+            } else {
+                return Result.error("添加失败");
+            }
+        }else {
+            return Result.error("用户名已存在");
         }
     }
     @PostMapping("/updateRemarks")
