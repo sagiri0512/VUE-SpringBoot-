@@ -124,9 +124,9 @@ public class RootPageController {
         }
     }
     private void setEmailProperties(){//初始化邮箱配置
-        emailProperties.setUser("sagiri0512@qq.com");
-        emailProperties.setCode("mfruzdvhdabqgicg");
-        emailProperties.setHost("smtp.qq.com");
+        emailProperties.setUser("自己邮箱");
+        emailProperties.setCode("邮箱授权码");
+        emailProperties.setHost("Host地址");
         emailProperties.setAuth(true);
     }
     private String generatedMailCode() {//生成验证码
