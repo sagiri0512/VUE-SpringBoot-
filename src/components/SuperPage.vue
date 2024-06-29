@@ -10,6 +10,7 @@
           <el-menu-item-group title="修改个人信息">
             <el-menu-item index="2" @click="toValue(2)">修改密码</el-menu-item>
             <el-menu-item index="3" @click="toValue(3)">修改用户名</el-menu-item>
+            <el-menu-item index="4" @click="toValue(4)">修改邮箱</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -21,21 +22,23 @@
       <SuperRootVue v-if="vue === 1" />
       <SuperUpdatePassVue v-else-if="vue === 2" style="margin-top: 12%"/>
       <SuperUpdateNameVue v-else-if="vue === 3" style="margin-top: 15%"/>
+      <RootMailVue v-else-if="vue === 4" style="margin-top: 15%"/>
     </el-container> 
   </el-container>
 </template>
 
 <script>
+import RootMailVue from './views/RootMail.vue';
 import SuperRootVue from './views/SuperRoot.vue';
 import SuperUpdateNameVue from './views/SuperUpdateName.vue';
 import SuperUpdatePassVue from './views/SuperUpdatePass.vue';
-
 
 export default {
   components: {
     SuperRootVue,//管理管理员
     SuperUpdatePassVue,//超级管理员修改密码
     SuperUpdateNameVue,//修改用户名
+    RootMailVue,//修改邮箱
   },
   data() {
     return {

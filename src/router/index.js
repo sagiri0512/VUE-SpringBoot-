@@ -3,6 +3,7 @@ import store from '../store'; // 引入 Vuex store
 import SuperPage from '../components/SuperPage.vue';
 import RootPage from '../components/RootPage.vue';
 import RootLogin from '../components/RootLogin.vue';
+import RootMailLogin from '@/components/RootMailLogin.vue';
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -15,6 +16,11 @@ const router = createRouter({
             path: '/RootLogin',
             name: 'RootLogin',
             component: RootLogin,
+        },
+        {
+            path: '/RootMailLogin',
+            name: 'RootMailLogin',
+            component: RootMailLogin,
         },
         {
             path: '/SuperPage',

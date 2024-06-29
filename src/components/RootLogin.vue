@@ -10,6 +10,7 @@
         <label for="password">密码：</label>
         <input type="password" id="password" v-model.lazy="password" />
       </div>
+      <router-link to="RootMailLogin" style="float: right;">使用邮箱登录</router-link>
       <button class="login-button" @click="login">登录</button>
     </div>
   </div>
@@ -96,6 +97,7 @@ h2 {
 }
 
 .login-button {
+  margin-top: 8px;
   width: 100%;
   padding: 10px;
   background-color: #007bff;

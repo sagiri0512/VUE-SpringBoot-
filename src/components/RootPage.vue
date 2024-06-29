@@ -12,8 +12,9 @@
             <el-menu-item index="3" @click="toValue(3)">管理</el-menu-item>
             <el-menu-item index="4" @click="toValue(4)">管理记录</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="修改密码">
+          <el-menu-item-group title="修改账号信息">
             <el-menu-item index="5" @click="toValue(5)">修改密码</el-menu-item>
+            <el-menu-item index="6" @click="toValue(6)">修改邮箱</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -26,13 +27,15 @@
       <ReviewArticleRecords v-else-if="vue === 2" />
       <ReportArticle v-else-if="vue === 3"/>
       <ReportArticleRecords v-else-if="vue === 4"/>
-      <UpdatePass v-else-if="5" style="margin-top: 10%;"/>
+      <UpdatePass v-else-if="vue === 5" style="margin-top: 10%"/> 
+      <RootMailVue v-else-if="vue === 6" style="margin-top: 10%"/>
     </el-container> 
   </el-container>
 </template>
 
 <script>
 import ReviewArticleVue from "./views/ReviewArticle.vue";
+import RootMailVue from './views/RootMail.vue';
 import ReviewArticleRecords from "./views/ReviewArticleRecords.vue";
 import ReportArticle from "./views/ReportArticle.vue";
 import ReportArticleRecords from "./views/ReportArticleRecords.vue";
@@ -47,6 +50,7 @@ export default {
     ReportArticle,//被举报文章
     ReportArticleRecords,//被举报操作记录
     UpdatePass,//修改密码
+    RootMailVue,//修改邮箱
   },
   data() {
     return {
