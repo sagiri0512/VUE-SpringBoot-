@@ -3,6 +3,7 @@ package com.blog.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.blog.entity.Manage;
+import com.blog.entity.RootMailCode;
 import com.blog.mapper.ManageMapper;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,18 @@ public class ManageService {
         QueryWrapper<Manage> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
         return manageMapper.selectOne(queryWrapper);
+    }
+
+    //新增
+    public Manage getManageByCompany(String columnName, String columnValue) {//根据列名的值查找一行
+        QueryWrapper<Manage> queryWrapper = Wrappers.query();
+        queryWrapper.eq(columnName, columnValue);
+        return manageMapper.selectOne(queryWrapper);
+    }
+    public boolean updateMailById(Integer id, String mail){//管理员修改邮箱
+        Manage manage = new Manage();
+        manage.setId(id);
+        manage.setMail(mail);
+        return manageMapper.updateById(manage) > 0;
     }
 }

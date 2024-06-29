@@ -39,7 +39,7 @@ public class SuperRootController {
         }
     }
     @PostMapping("/addRoot")
-    public Result addRoot(@RequestBody Manage root){//添加管理员，名字重复添加
+    public Result addRoot(@RequestBody Manage root){//添加管理员，名字  重复添加
         if(manageService.getManageByName(root.getUsername()) == null) {
             root.setPassword("123456");
             root.setStatus(0);
@@ -109,4 +109,8 @@ public class SuperRootController {
             AssignmentUtils.setSize();
         }
     }
+
+    //新增代码：
+    //绑定邮箱：
+
 }

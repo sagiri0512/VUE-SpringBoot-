@@ -2,16 +2,19 @@ package com.blog.controller;
 
 import com.blog.dto.Result;
 import com.blog.dto.RootInfo;
+import com.blog.entity.EmailProperties;
 import com.blog.entity.Manage;
 import com.blog.service.ManageService;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RootLoginController {
-
+    @Autowired
+    private EmailProperties emailProperties;
     @Resource
     private ManageService manageService;
     @PostMapping("/rootLogin")
@@ -31,5 +34,6 @@ public class RootLoginController {
             }
         }
     }
-
+    //新增代码：
+    //
 }

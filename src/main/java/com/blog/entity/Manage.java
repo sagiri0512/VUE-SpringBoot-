@@ -18,4 +18,5 @@ public class Manage {
     private Integer status;
     private String remarks;
     private Byte state;
+    private String mail;
 }
